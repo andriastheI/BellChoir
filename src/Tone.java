@@ -185,6 +185,7 @@ public class Tone {
                     try {
                         coordinator.wait();
                     } catch (InterruptedException e) {
+                        System.out.println("Song conduction was interrupted while waiting for note: " + bn.note);
                         return;
                     }
                 }

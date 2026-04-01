@@ -76,7 +76,9 @@ public class Member implements Runnable {
      */
     @Override
     public void run() {
-        while (true) { // Keep the thread alive to continuously process notes
+        boolean running = true;
+
+        while (running) { // Keep the thread alive while work is available
             BellNote current;
 
             synchronized (this) {
@@ -86,17 +88,24 @@ public class Member implements Runnable {
                     // Check if the song has finished before continuing
                     synchronized (coordinator) {
                         if (coordinator.songFinished) {
-                            // Exit thread if no more work is needed
-                            return;
+                            running = false;
+                            break;
                         }
                     }
 
                     try {
                         wait(); // Put thread to sleep until notified
                     } catch (InterruptedException e) {
-                        // Exit safely if interrupted
-                        return;
+                        System.out.println(name + " was interrupted and is stopping.");
+                        // Stop the thread cleanly if interrupted
+                        running = false;
+                        break;
                     }
+                }
+
+                // Exit loop if shutdown was requested
+                if (!running) {
+                    break;
                 }
 
                 // Retrieve assigned note and reset play flag
@@ -108,9 +117,9 @@ public class Member implements Runnable {
                 // Play the assigned note using the tone generator
                 tone.playBellNote(current);
             } catch (IllegalStateException e) {
-                e.printStackTrace();
-                // Exit if playback fails
-                return;
+                System.out.println(name + " failed to play note: " + e.getMessage());
+                // Stop the thread if playback fails
+                break;
             }
 
             // Notify coordinator that this note has finished playing
