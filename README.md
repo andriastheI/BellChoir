@@ -33,12 +33,10 @@ Additionally, the program generates real audio using **Java Sound API**, where e
 - Audio generation using sine waves
 - Build automation using Apache Ant
 
----
 
 ## 🏗️ Project Structure
-
+```text
 Lab02/
-│
 ├── src/
 │   ├── Tone.java
 │   ├── Member.java
@@ -47,12 +45,10 @@ Lab02/
 │   ├── Note.java
 │   ├── NoteLength.java
 │   └── *.txt (song files)
-│
 ├── dist/ (generated after build)
 ├── build.xml
 └── README.md
-
----
+```
 
 ## ⚙️ Requirements
 
