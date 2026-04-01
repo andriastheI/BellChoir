@@ -142,4 +142,4 @@ ant run -Dsong=YourSong.txt
 
 ## 🙌 Acknowledgment
 
-Frontend structuring, documentation guidance, and development assistance were supported by ChatGPT (OpenAI).
+Documentation guidance, and development assistance were supported by ChatGPT (OpenAI).
