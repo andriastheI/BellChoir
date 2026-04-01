@@ -241,12 +241,6 @@ public class Tone {
             members.add(m);
             memberCount++;
         }
-
-        // Print assigned notes for debugging
-        for (Member m : members) {
-            System.out.println(m.getName() + " assigned: " + m.getAssignedNotes());
-        }
-
         return members;
     }
 
