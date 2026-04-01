@@ -1,0 +1,68 @@
+<!--
+    Filename: build.xml
+    Author: Andrias Zelele
+    Date: 2026
+    Description:
+    Apache Ant build file for Lab02.
+    Compiles source code, packages it into a JAR file,
+    and runs the bell choir application with an optional song file.
+-->
+
+<project name="Lab02" default="compile" basedir=".">
+
+    <!-- Directory containing source files -->
+    <property name="src" location="src"/>
+
+    <!-- Directory where compiled files and JAR will be stored -->
+    <property name="dist" location="dist"/>
+
+    <!-- Preset for Java compilation settings -->
+    <presetdef name="javac">
+        <javac includeantruntime="false" debug="true"/>
+    </presetdef>
+
+    <!-- Initializes build directories -->
+    <target name="init">
+        <mkdir dir="${dist}"/>
+        <mkdir dir="${dist}/classes"/>
+    </target>
+
+    <!-- Compiles Java source files and copies resource files -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${dist}/classes"/>
+
+        <!-- Copy song text files into output directory -->
+        <copy todir="${dist}/classes">
+            <fileset dir="${src}" includes="**/*.txt"/>
+        </copy>
+    </target>
+
+    <!-- Creates executable JAR file -->
+    <target name="jar" depends="init,compile">
+        <jar destfile="${dist}/${ant.project.name}.jar" basedir="${dist}/classes">
+            <manifest>
+                <!-- Specifies entry point of the program -->
+                <attribute name="Main-Class" value="Tone"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Sets default song file if none is provided -->
+    <target name="songarg" unless="song">
+        <property name="song" value="MaryLamb.txt"/>
+    </target>
+
+    <!-- Runs the program using the generated JAR -->
+    <target name="run" depends="jar,songarg">
+        <java jar="${dist}/${ant.project.name}.jar" fork="true">
+            <!-- Pass song file as argument -->
+            <arg value="${song}"/>
+        </java>
+    </target>
+
+    <!-- Cleans build directory -->
+    <target name="clean">
+        <delete dir="${dist}"/>
+    </target>
+
+</project>
