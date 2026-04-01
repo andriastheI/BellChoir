@@ -60,17 +60,21 @@ Lab02/
 ## ▶️ How to Run the Program (Using Ant)
 
 ### 1. Navigate to project directory
+``` bash
 cd Lab02
-
+```
 ### 2. Compile the project
+``` bash
 ant compile
-
+```
 ### 3. Run the program (default song)
+``` bash
 ant run
-
+```
 ### 4. Run with a specific song file
+``` bash
 ant run -Dsong=YourSong.txt
-
+```
 ---
 
 ## 🎶 Song File Format
@@ -111,17 +115,21 @@ REST 4
 This project is hosted on GitHub for version control and collaboration.
 
 ### 🔹 Clone the Repository
+``` bash
 git clone https://github.com/andriastheI/BellChoir.git
-
+```
 ### 🔹 Navigate into the Project
+``` bash
 cd Lab02
-
+```
 ### 🔹 Run the Program
+``` bash
 ant run
-
+```
 ### 🔹 Run with a specific song file
+``` bash
 ant run -Dsong=YourSong.txt
-
+```
 ---
 
 ## 📝 Notes
